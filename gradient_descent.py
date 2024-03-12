@@ -1,4 +1,5 @@
 import numpy as np
+from random import shuffle
 
 
 class GradientDescent:
@@ -27,11 +28,11 @@ class GradientDescent:
     n_samples: int
         the number of rows or samples in the input or features matrix.
     weights: np.ndarray
-        outputs the weights of the model after training.
+        outputs the weights of the model after training. Accessible after training
     loss: float
-        outputs the loss after training
+        outputs the loss after training. Accessible after training.
     grad: float
-        outputs the value of gradient of the loss function after training.
+        outputs the value of gradient of the loss function after training. Accessible after training.
 
     Methods
     -------
@@ -78,6 +79,7 @@ class GradientDescent:
         self.grad_function = grad_function
         self.n_features = self.x.shape[1]
         self.n_samples = self.x.shape[0]
+        self.__tolerance = 0.001
 
     def initialize_weights(self):
         """
@@ -123,4 +125,34 @@ class GradientDescent:
     def get_momentum(self):
         self.momentum = self.momentum * self.beta + (1 - self.beta) * self.grad
 
+    def update_weights(self, x_i, y_i):
+        self.compute_grad(x_i, y_i)
+        self.get_momentum()
+        self.weights = self.weights - self.lr * self.momentum
 
+    def train(self):
+        """Computes gradient descent.
+        If batch = 1, stochastic gradient descent is carried out.
+        If beta is zero, Gradient descent is done without momentum."""
+
+        self.losses = []
+        self.initialize_weights()
+        avg_loss = float("inf")
+        indexes = list(range(self.x.shape[0]))
+        self.tolerance = 0.001
+
+        avg_loss = float('inf')
+        epoch = 0
+        while epoch < self.epochs and avg_loss > self.tolerance:
+            self.initialize_momentum()
+            epoch_loss = 0
+            shuffle(indexes)
+            for i in range(0, self.n_samples, self.batch):
+                x_i = self.x[indexes[i: i + self.batch]]
+                y_i = self.y[indexes[i: i + self.batch]]
+                epoch_loss += self.compute_loss(x_i, y_i)
+                self.update_weights(x_i, y_i)
+
+            avg_loss = epoch_loss / self.n_samples
+            self.losses.append(avg_loss)
+            epoch += 1
