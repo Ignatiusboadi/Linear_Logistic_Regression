@@ -22,6 +22,17 @@ class GradientDescent:
         outputs function used as loss function in the implementation of the algorithm.
     grad_function: function
         outputs the gradient of the loss function.
+    n_features: int
+        the number of features or columns of the input or features matrix.
+    n_samples: int
+        the number of rows or samples in the input or features matrix.
+    weights: np.ndarray
+        outputs the weights of the model after training.
+
+    Methods
+    -------
+    initialize_weights:
+        initilizes the weights before the training algorithm starts.
 
     """
 
@@ -57,3 +68,15 @@ class GradientDescent:
         self.loss_function = loss_function
         self.grad_function = grad_function
         self.weights = None
+        self.n_features = self.x.shape[1]
+        self.n_samples = self.x.shape[0]
+
+    def initialize_weights(self):
+        """
+        initializes the weights before the training algorithm starts. A 2-d array with one column and rows equal to
+        the 'number of features + 1' is created. This sets the weight attribute to the weights created.
+        :return: None.
+        """
+        self.weights = np.zeros((self.x.shape[1], 1))
+
+
