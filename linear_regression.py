@@ -38,7 +38,7 @@ class LinearRegression:
         self.epochs = epochs
         self.beta = beta
         self.lr = lr
-        self.batch = batch
+        self.batch = self.x.shape[0] if batch is None else batch
         self.weights = None
 
     def make_prediction(self, x):
