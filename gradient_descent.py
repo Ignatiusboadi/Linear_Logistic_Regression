@@ -1,3 +1,4 @@
+import matplotlib.pyplot as plt
 import numpy as np
 from random import shuffle
 
@@ -156,3 +157,4 @@ class GradientDescent:
             avg_loss = epoch_loss / self.n_samples
             self.losses.append(avg_loss)
             epoch += 1
+
