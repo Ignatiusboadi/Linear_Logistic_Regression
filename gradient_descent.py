@@ -71,10 +71,6 @@ class GradientDescent:
         :param grad_function: function
             The gradient of the loss function to be used in training. Must be specified.
         """
-        self.weights = None
-        self.grad = None
-        self.loss = None
-        self.momentum = None
         self.x = x
         self.y = y
         self.epochs = epochs
@@ -86,6 +82,10 @@ class GradientDescent:
         self.n_features = self.x.shape[1]
         self.n_samples = self.x.shape[0]
         self.tolerance = 0.001
+        self.weights = None
+        self.grad = None
+        self.loss = None
+        self.momentum = None
 
     def initialize_weights(self):
         """
