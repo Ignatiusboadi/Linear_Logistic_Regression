@@ -28,12 +28,21 @@ class GradientDescent:
         the number of rows or samples in the input or features matrix.
     weights: np.ndarray
         outputs the weights of the model after training.
+    loss: float
+        outputs the loss after training
+    grad: float
+        outputs the value of gradient of the loss function after training.
 
     Methods
     -------
     initialize_weights:
-        initilizes the weights before the training algorithm starts.
-
+        initializes the weights before the training algorithm starts.
+    initialize_momentum:
+        initializes the momentum before the training algorithm starts.
+    compute_loss:
+        computes loss for an iteration or epoch.
+    compute_grad:
+        computes value of the gradient of the loss for an iteration or epoch.
     """
 
     def __init__(self, x, y, epochs=1000, lr=0.1, batch=None, beta=0.9, loss_function=None, grad_function=None):
@@ -67,7 +76,6 @@ class GradientDescent:
         self.beta = beta
         self.loss_function = loss_function
         self.grad_function = grad_function
-        self.weights = None
         self.n_features = self.x.shape[1]
         self.n_samples = self.x.shape[0]
 
@@ -78,5 +86,41 @@ class GradientDescent:
         :return: None.
         """
         self.weights = np.zeros((self.x.shape[1], 1))
+
+    def initialize_momentum(self):
+        """
+        initializes momentum. This sets an attribute of the object, self.momentum.
+        :return: None
+        """
+        self.momentum = 0
+
+    def make_prediction(self):
+        """
+        makes prediction using the input array and the set of weights.
+        :return: np.ndarray
+        """
+        return self.x @ self.weights
+
+    def compute_loss(self, x, y):
+        """
+        computes loss given a features matrix, target matrix and loss function
+        :param x: features matrix
+        :param y: target matrix
+        :return: float.
+        """
+        self.loss = self.loss_function(x, y, self.weights)
+        return self.loss
+
+    def compute_grad(self, x, y):
+        """
+        computes the gradient for an iteration using the given features matrix, target matrix and gradient function.
+        :param x: features matrix
+        :param y: target matrix
+        :return: float
+        """
+        self.grad = self.grad_function(x, y, self.weights)
+
+    def get_momentum(self):
+        self.momentum = self.momentum * self.beta + (1 - self.beta) * self.grad
 
 
