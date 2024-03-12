@@ -47,7 +47,7 @@ class GradientDescent:
         computes value of the gradient of the loss for an iteration or epoch.
     """
 
-    def __init__(self, x, y, epochs=1000, lr=0.1, batch=None, beta=0.9, loss_function=None, grad_function=None):
+    def __init__(self, x, y, epochs=1000, lr=0.1, batch=None, beta=0.0, loss_function=None, grad_function=None):
         """
         initializes an object of class GradientDescent. This will be used in implementing gradient descent algorithm.
         The following params can be specified:
@@ -63,8 +63,9 @@ class GradientDescent:
                 If batch is None, batch Gradient descent is implemented. If it is 1, stochastic gradient descent
                 is implemented, otherwise minibatch is implemented with each batch containing the specified data
                 points. Default is None, i.e, batch gradient descent.
-        :param beta: float | Optional | default = 0.9
-                specifies the momentum to be used in the training. Default is 0.9.
+        :param beta: float | Optional | default = 0.0
+                specifies the momentum to be used in the training. Default is 0.0. This implements the algorithm
+                without momentum.
         :param loss_function: function
             The loss function to be used in the training. Must be specified.
         :param grad_function: function
