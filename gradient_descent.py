@@ -70,6 +70,10 @@ class GradientDescent:
         :param grad_function: function
             The gradient of the loss function to be used in training. Must be specified.
         """
+        self.weights = None
+        self.grad = None
+        self.loss = None
+        self.momentum = None
         self.x = x
         self.y = y
         self.epochs = epochs
@@ -80,7 +84,7 @@ class GradientDescent:
         self.grad_function = grad_function
         self.n_features = self.x.shape[1]
         self.n_samples = self.x.shape[0]
-        self.__tolerance = 0.001
+        self.tolerance = 0.001
 
     def initialize_weights(self):
         """
@@ -131,7 +135,7 @@ class GradientDescent:
         self.get_momentum()
         self.weights = self.weights - self.lr * self.momentum
 
-    def train(self):
+    def fit(self):
         """Computes gradient descent.
         If batch = 1, stochastic gradient descent is carried out.
         If beta is zero, Gradient descent is done without momentum."""
@@ -140,9 +144,6 @@ class GradientDescent:
         self.initialize_weights()
         avg_loss = float("inf")
         indexes = list(range(self.x.shape[0]))
-        self.tolerance = 0.001
-
-        avg_loss = float('inf')
         epoch = 0
         while epoch < self.epochs and avg_loss > self.tolerance:
             self.initialize_momentum()
@@ -158,3 +159,6 @@ class GradientDescent:
             self.losses.append(avg_loss)
             epoch += 1
 
+    def plot_losses(self):
+        plt.plot(self.losses)
+        plt.show()
