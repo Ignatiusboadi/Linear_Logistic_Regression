@@ -22,11 +22,12 @@ class LinearRegression:
         :param y: np.ndarray
             target matrix y
         :param epochs: int | optional | default = 1000
-            number of epochs
+            number of epochs to be used for the gradient descent algorithm.
         :param lr: float | optional | default = 0.1
-            learning rate
+            learning rate for the gradient descent algorithm.
         :param beta: float | optional | default = 0.0
-            momentum
+            specifies the momentum to be used in the training. Default is 0.0. This implements the gradient descent
+            algorithm without momentum.
         :param batch: int
             if None, batch gradient descent will be used for the Gradient descent algorithm, 1 for stochastic gradient
             descent and an integer for the number of batches in each batch for minibatch gradient descent.
@@ -37,3 +38,16 @@ class LinearRegression:
         self.beta = beta
         self.lr = lr
         self.batch = batch
+        self.weights = None
+
+    def make_prediction(self, x):
+        return x @ self.weights
+
+    def grad_function(self, x, y, weights):
+        y = y.reshape((-1, 1))
+        grad = 2 * x.T @ (x @ weights - y) / y.shape[0]
+        return grad
+
+    def loss_function(self, x, y, weights):
+        y = y.reshape((-1, 1))
+        return np.mean((y - (x @ weights)) ** 2)
