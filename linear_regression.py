@@ -1,5 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
+from gradient_descent import GradientDescent
 
 
 class LinearRegression:
@@ -51,3 +52,10 @@ class LinearRegression:
     def loss_function(self, x, y, weights):
         y = y.reshape((-1, 1))
         return np.mean((y - (x @ weights)) ** 2)
+
+    def fit(self):
+        grad_descent = GradientDescent(self.x, self.y, self.epochs, self.lr, self.batch, self.beta,
+                                       self.loss_function, self.grad_function)
+        grad_descent.sgd_with_momentum()
+        self.weights = grad_descent.weights
+        self.losses = grad_descent.losses
