@@ -30,16 +30,19 @@ class LinearRegression:
 
     Methods
     --------
-    make_prediction:
-        makes prediction using a given features matrix and the weights determined from the Gradient descent
-        algorithm.
     fit:
         implements the gradient descent algorithm using the given features matrix and target vector to find
         the weights.
+    make_prediction:
+        makes prediction using a given features matrix and the weights determined from the Gradient descent
+        algorithm.
     loss_function:
         computes the loss using given weights, a feature matrix and a target vector.
     grad_function:
         computes the gradient of the loss using given weights, a feature matrix and a target vector.
+    plot_function:
+        plots the graphs of the target vector against one column feature matrix, and the predicted y value against
+        the one column feature matrix.
     r_square:
         computes the r-square on the training set if no data is passed. When a dataset is passed,
         makes a prediction using x and the weights, then computes the r-square.
@@ -84,11 +87,33 @@ class LinearRegression:
         return x @ self.weights
 
     def grad_function(self, x, y, weights):
+        """
+        linear regression gradient of the loss function. This will be passed to the gradient descent
+        algorithm to compute the gradient of the loss for each epoch(or iteration).
+        :param x: np.ndarray
+            features matrix for training
+        :param y: np.ndarray
+            target vector or matrix for training
+        :param weights:
+            computed weights to be evaluated
+        :return: float
+        """
         y = y.reshape((-1, 1))
         grad = 2 * x.T @ (x @ weights - y) / y.shape[0]
         return grad
 
     def loss_function(self, x, y, weights):
+        """
+        linear regression loss function. This will be passed to the gradient descent algorithm to compute
+        the loss for each epoch.
+        :param x: np.ndarray
+            features matrix for training
+        :param y: np.ndarray
+            target vector or matrix for training
+        :param weights:
+            computed weights to be evaluated
+        :return: float
+        """
         y = y.reshape((-1, 1))
         return np.mean((y - (x @ weights)) ** 2)
 
@@ -124,6 +149,15 @@ class LinearRegression:
         return 1 - ss_reg/ss_total
 
     def plot_function(self, x=None, y=None):
+        """
+        Plots the graphs of feature vector against target vector, and feature vector and predicted y.
+        :param x: np.ndarray
+            feature vector, should be a vector.
+        :param y: np.ndarray
+            target vector
+        :return: graph
+        """
+        assert x.shape[1] == 1, "You can only plot one column feature matrix against a one column target matrix."
         x = self.x if x is not None else x
         y = self.y if y is not None else y
         y_pred = self.make_prediction(x)
