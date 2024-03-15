@@ -42,7 +42,7 @@ class LinearRegression:
         computes the gradient of the loss using given weights, a feature matrix and a target vector.
     r_square:
         computes the r-square on the training set if no data is passed. When a dataset is passed,
-        makes a prediction using x and the weights, then computes the loss using the values of y passed.
+        makes a prediction using x and the weights, then computes the r-square.
     """
 
     def __init__(self, x, y, epochs=1000, lr=0.1, batch=None, beta=0.0):
@@ -77,7 +77,7 @@ class LinearRegression:
         makes prediction using a given features matrix and the weights determined from the Gradient descent
         algorithm.
         :param x: np.ndarray
-            a features matrix.
+            features matrix.
         :return: np.ndarray
             predicted values using the matrix and computed weights.
         """
@@ -93,6 +93,11 @@ class LinearRegression:
         return np.mean((y - (x @ weights)) ** 2)
 
     def fit(self):
+        """
+        Implements gradient descent algorithm to find the best weights for the model. This changes the weights
+        and losses attributes.
+        :return: None
+        """
         grad_descent = GradientDescent(self.x, self.y, self.epochs, self.lr, self.batch, self.beta,
                                        self.loss_function, self.grad_function)
         grad_descent.fit()
@@ -100,6 +105,22 @@ class LinearRegression:
         self.losses = grad_descent.losses
 
     def r_square(self, x=None, y=None):
+        """
+        computes the r-square on the training set if no data is passed. When a dataset is passed,
+        makes a prediction using x and the weights, then computes the r-square.
+        :param x: np.ndarray | default = features matrix used for training
+            features matrix for prediction.
+        :param y: np.ndarray | default = target matrix used for training
+            target matrix for evaluation.
+        :return: float
+        """
         x = self.x if x is not None else x
         y = self.y if y is not None else y
-        return self.loss_function(x, y, self.weights)
+        y_pred = self.make_prediction(x)
+        y_true = y
+        y_mean = np.mean(y)
+        ss_reg = np.sum((y_true - y_pred) ** 2)
+        ss_total = np.sum((y_true - y_mean) ** 2)
+        return 1 - ss_reg/ss_total
+
+
