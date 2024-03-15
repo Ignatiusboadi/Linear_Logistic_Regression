@@ -123,4 +123,12 @@ class LinearRegression:
         ss_total = np.sum((y_true - y_mean) ** 2)
         return 1 - ss_reg/ss_total
 
-
+    def plot_function(self, x=None, y=None):
+        x = self.x if x is not None else x
+        y = self.y if y is not None else y
+        y_pred = self.make_prediction(x)
+        plt.figure(figsize=(12, 7))
+        plt.plot(x, y, 'b*-', label='true_values')
+        plt.plot(x, y_pred, 'r*-', label='Predicted values')
+        plt.legend(loc='best')
+        plt.show()
