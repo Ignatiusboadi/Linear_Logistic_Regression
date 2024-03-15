@@ -130,9 +130,17 @@ class GradientDescent:
         self.grad = self.grad_function(x, y, self.weights)
 
     def get_momentum(self):
+        """
+        updates momentum for an iteration or epoch.
+        :return: None
+        """
         self.momentum = self.momentum * self.beta + (1 - self.beta) * self.grad
 
     def update_weights(self, x_i, y_i):
+        """
+        updates weight for an iteration or epoch.
+        :return: None
+        """
         self.compute_grad(x_i, y_i)
         self.get_momentum()
         self.weights = self.weights - self.lr * self.momentum
@@ -140,7 +148,8 @@ class GradientDescent:
     def fit(self):
         """Computes gradient descent.
         If batch = 1, stochastic gradient descent is carried out.
-        If beta is zero, Gradient descent is done without momentum."""
+        If beta is zero, Gradient descent is done without momentum.
+        :return None"""
 
         self.losses = []
         self.initialize_weights()
@@ -162,5 +171,9 @@ class GradientDescent:
             epoch += 1
 
     def plot_losses(self):
+        """
+        plots average losses computed for each epoch in the gradient descent algorithm.
+        :return:
+        """
         plt.plot(self.losses)
         plt.show()
