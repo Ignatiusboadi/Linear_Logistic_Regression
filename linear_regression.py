@@ -56,6 +56,6 @@ class LinearRegression:
     def fit(self):
         grad_descent = GradientDescent(self.x, self.y, self.epochs, self.lr, self.batch, self.beta,
                                        self.loss_function, self.grad_function)
-        grad_descent.sgd_with_momentum()
+        grad_descent.fit()
         self.weights = grad_descent.weights
         self.losses = grad_descent.losses

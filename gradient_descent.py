@@ -86,6 +86,7 @@ class GradientDescent:
         self.grad = None
         self.loss = None
         self.momentum = None
+        self.losses = None
 
     def initialize_weights(self):
         """
