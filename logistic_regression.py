@@ -6,11 +6,11 @@ import gradient_descent
 
 class LogisticRegression:
     """
-    A simple implementation of logistic regression using numpy.
-
     This class provides functionality for training a logistic regression model
     on labeled binary classification data using gradient descent optimization.
     It supports both batch gradient descent and stochastic gradient descent.
+    The user can specify  the number of epochs, the learning rate for the
+    algorithm and beta, if they want to apply momentum.
 
     Attributes
     ----------
@@ -32,6 +32,21 @@ class LogisticRegression:
     losses: np.ndarray
         outputs the average loss for each epoch from the implementation of the gradient descent algorithm.
 
+    Methods
+    --------
+    add_ones:
+        adds a column of ones to the feature matrix to account for the intercept.
+    sigmoid:
+        computes the sigmoid function for the given features matrix.
+    predict:
+        classifies predictions from the sigmoid function into appropriate class using a threshold of 0.5.
+    cross_entropy:
+        computes the loss for a given weights. Used in gradient descent algorithm to compute weights.
+    grad_function:
+        gradient of cross entropy. Used in gradient descent algorithm to compute weights.
+    fit:
+        implements gradient descent algorithm using inputs to determine best weights. Also changes loss attribute
+        of the object.
     """
 
     def __init__(self, x, y, epochs=100, lr=0.1, beta=0, batch=None):
@@ -60,21 +75,50 @@ class LogisticRegression:
         self.weights = None
 
     def add_ones(self, x):
+        """
+        adds a column of ones to the feature matrix to account for the intercept.
+        :param x: np.ndarray
+            features matrix
+        :return: np.ndarray
+        """
         ones_vector = np.ones((self.x.shape[0], 1))
         return np.hstack((ones_vector, x))
 
     def sigmoid(self, x):
+        """
+        computes the sigmoid function for the given features matrix. returns an N x 1 matrix
+        of probabilities.
+        :param x: np.ndarray
+            features matrix
+        :return: np.ndarray
+        """
         if x.shape[1] != self.weights.shape[0]:
             x = self.add_ones(x)
         z = x @ self.weights
         return 1 / (1 + np.exp(-z))
 
     def predict(self, x):
+        """
+        classifies predictions from the sigmoid function into appropriate class using a threshold of 0.5.
+        :param x: np.ndarray
+            features matrix
+        :return: np.ndarray
+        """
         probas = self.sigmoid(x)
         output = (probas >= 0.5).astype(int)
         return output
 
     def cross_entropy(self, x, y, w):
+        """
+        computes the loss for a given weights. Used in gradient descent algorithm to compute weights.
+        :param x: np.ndarray
+            features matrix
+        :param y: np.ndarray
+            target matrix
+        :param w: np.ndarray
+            weights
+        :return: float
+        """
         y = y.reshape(-1, 1)
         z = x @ w
         y_pred = 1 / (1 + np.exp(-z))
@@ -82,12 +126,27 @@ class LogisticRegression:
         return loss
 
     def grad_function(self, x, y, w):
+        """
+        gradient of cross entropy. Used in gradient descent algorithm to compute weights.
+        :param x: np.ndarray
+            features matrix
+        :param y: np.ndarray
+            target matrix
+        :param w: np.ndarray
+            weights
+        :return: float
+        """
         y = y.reshape(-1, 1)
         z = x @ w
         y_pred = 1 / (1 + np.exp(-z))
         return -1 / x.shape[0] * x.T @ (y - y_pred)
 
     def fit(self):
+        """
+        implements gradient descent algorithm using inputs to determine best weights. Also changes loss attribute
+        of the object.
+        :return: None
+        """
         grad_descent = gradient_descent.GradientDescent(self.add_ones(self.x), self.y, self.epochs, self.lr,
                                                         self.beta,self.batch, loss_function=self.cross_entropy,
                                                         grad_function=self.grad_function)
