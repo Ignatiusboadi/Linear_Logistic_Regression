@@ -50,7 +50,7 @@ class LinearRegression:
         makes a prediction using x and the weights, then computes the r-square.
     """
 
-    def __init__(self, x, y, epochs=1000, lr=0.1, batch=None, beta=0.0):
+    def __init__(self, x, y, epochs=100, lr=0.1, batch=None, beta=0.0):
         """
         Initialize regression model for a given input matrix X and target vector y.
         :param x: np.ndarray
