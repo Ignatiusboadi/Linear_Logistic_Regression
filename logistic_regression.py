@@ -84,7 +84,7 @@ class LogisticRegression:
             features matrix
         :return: np.ndarray
         """
-        ones_vector = np.ones((self.x.shape[0], 1))
+        ones_vector = np.ones((x.shape[0], 1))
         return np.hstack((ones_vector, x))
 
     def sigmoid(self, x):
