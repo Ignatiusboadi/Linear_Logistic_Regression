@@ -60,7 +60,7 @@ print('Test 2 test r-square', lin_reg.r_square(lin_x_test, lin_y_test))
 plt.plot(lin_reg.losses)
 plt.title('Linear Regression Test 2 losses.')
 plt.show()
-lin_reg.plot_function("Linear regression Test 2 Actual and Predicted")
+lin_reg.plot_function(title="Linear regression Test 2 Actual and Predicted")
 
 
 # Test 1
@@ -75,8 +75,10 @@ print('Test 1 Test accuracy', log_reg.accuracy(log_x_test, log_y_test))
 plt.plot(log_reg.losses)
 plt.title('Logistic Regression Test 1 losses.')
 plt.show()
-log_reg.plot_decision_boundary(log_x_train, log_y_train, log_reg.weights, log_reg.weights[0])
-log_reg.plot_decision_boundary(log_x_test, log_y_test, log_reg.weights, log_reg.weights[0])
+log_reg.plot_decision_boundary(log_x_train, log_y_train, log_reg.weights, log_reg.weights[0],
+                               title='Test 1 Training data')
+log_reg.plot_decision_boundary(log_x_test, log_y_test, log_reg.weights, log_reg.weights[0],
+                               title='Test 1 Test data')
 
 # Test 2
 X, y = make_moons(n_samples=100, noise=0.24)
@@ -87,7 +89,8 @@ print('Test 2 weights', log_reg.weights)
 print('Test 2 Training accuracy', log_reg.accuracy())
 print('Test 2 Test accuracy', log_reg.accuracy(log_x_test, log_y_test))
 plt.plot(log_reg.losses)
-plt.title('Logistic Regression Test 1 losses.')
+plt.title('Logistic Regression Test 2 losses.')
 plt.show()
-log_reg.plot_decision_boundary(log_x_train, log_y_train, log_reg.weights, log_reg.weights[0])
-log_reg.plot_decision_boundary(log_x_test, log_y_test, log_reg.weights, log_reg.weights[0])
+log_reg.plot_decision_boundary(log_x_train, log_y_train, log_reg.weights, log_reg.weights[0],
+                               title='Test 2 Training data')
+log_reg.plot_decision_boundary(log_x_test, log_y_test, log_reg.weights, log_reg.weights[0], title='Test 2 Test data')

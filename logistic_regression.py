@@ -174,7 +174,7 @@ class LogisticRegression:
         accuracy_value = np.sum(y_true == y_pred) / y_true.shape[0]
         return accuracy_value
 
-    def plot_decision_boundary(self, X=None, y=None, w=None, b=None):
+    def plot_decision_boundary(self, X=None, y=None, w=None, b=None, title='Decision Boundary'):
         """
         plots the feature matrix and target vector with decision boundary.
         :param X: np.ndarray
@@ -185,6 +185,8 @@ class LogisticRegression:
             weights
         :param b: np.ndarray
             intercept
+        :param title: str
+            adds title to graph
         :return:
         """
         # z = w1x1 + w2x2 + w0
@@ -206,5 +208,5 @@ class LogisticRegression:
         plt.xlabel("feature 1")
         plt.ylabel("feature 2")
         plt.plot(x1, x2, 'y-')
-        plt.title('Decision Boundary')
+        plt.title(title)
         plt.show()
