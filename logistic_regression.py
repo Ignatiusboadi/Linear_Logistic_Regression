@@ -173,3 +173,38 @@ class LogisticRegression:
         y_true = y_true.reshape((-1, 1))
         accuracy_value = np.sum(y_true == y_pred) / y_true.shape[0]
         return accuracy_value
+
+    def plot_decision_boundary(self, X=None, y=None, w=None, b=None):
+        """
+        plots the feature matrix and target vector with decision boundary.
+        :param X: np.ndarray
+            features matrix
+        :param y: np.ndarray
+            target vector
+        :param w: np.ndarray
+            weights
+        :param b: np.ndarray
+            intercept
+        :return:
+        """
+        # z = w1x1 + w2x2 + w0
+        # one can think of the decision boundary as the line x2=mx1+c
+        # Solving we find m and c
+        x = self.x if X is None else X
+        y = self.y if y is None else y
+        x1 = [X[:, 0].min(), X[:, 0].max()]
+        m = -w[1] / w[2]
+        c = -b / w[2]
+        x2 = m * x1 + c
+
+        # Plotting
+        fig = plt.figure(figsize=(10, 8))
+        plt.scatter(X[:, 0], X[:, 1], c=y)
+        plt.scatter(X[:, 0], X[:, 1], c=y)
+        plt.xlim([-2, 3])
+        plt.ylim([0, 2.2])
+        plt.xlabel("feature 1")
+        plt.ylabel("feature 2")
+        plt.title('Decision Boundary')
+        plt.plot(x1, x2, 'y-')
+        plt.show()
