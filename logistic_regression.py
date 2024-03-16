@@ -205,6 +205,6 @@ class LogisticRegression:
         plt.ylim([0, 2.2])
         plt.xlabel("feature 1")
         plt.ylabel("feature 2")
-        plt.title('Decision Boundary')
         plt.plot(x1, x2, 'y-')
+        plt.title('Decision Boundary')
         plt.show()
