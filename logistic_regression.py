@@ -151,7 +151,7 @@ class LogisticRegression:
         :return: None
         """
         grad_descent = gradient_descent.GradientDescent(self.add_ones(self.x), self.y, self.epochs, self.lr,
-                                                        self.beta,self.batch, loss_function=self.cross_entropy,
+                                                        self.batch, self.beta, loss_function=self.cross_entropy,
                                                         grad_function=self.grad_function)
         grad_descent.fit()
         self.weights = grad_descent.weights
