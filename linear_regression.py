@@ -141,30 +141,28 @@ class LinearRegression:
             target vector for evaluation.
         :return: float
         """
-        x = self.x if x is not None else x
-        y = self.y if y is not None else y
+        x = self.x if x is None else x
+        y_true = self.y if y is None else y
         y_pred = self.make_prediction(x)
-        y_true = y
-        y_mean = np.mean(y)
+        y_mean = np.mean(y_true)
         ss_reg = np.sum((y_true - y_pred) ** 2)
         ss_total = np.sum((y_true - y_mean) ** 2)
         return 1 - ss_reg/ss_total
 
     def plot_function(self, x=None, y=None):
         """
-        Plots the graphs of feature vector against target vector, and feature vector and predicted y.
+        Plots the graphs of true target values against predicted values with a regression line.
         :param x: np.ndarray
             feature vector, should be a vector.
         :param y: np.ndarray
             target vector
         :return: graph
         """
-        assert x.shape[1] == 1, "You can only plot one column feature matrix against a one column target vector."
-        x = self.x if x is not None else x
-        y = self.y if y is not None else y
+        x = self.x if x is None else x
+        y = self.y if y is None else y
         y_pred = self.make_prediction(x)
         plt.figure(figsize=(12, 7))
-        plt.plot(x, y, 'b*-', label='true_values')
-        plt.plot(x, y_pred, 'r*-', label='Predicted values')
+        plt.plot(x[:, 1], y, 'b*-', label='true_values')
+        plt.plot(x[:, 1], y_pred, 'r*-', label='Predicted values')
         plt.legend(loc='best')
         plt.show()
