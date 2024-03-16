@@ -162,7 +162,7 @@ class LinearRegression:
         y = self.y if y is None else y
         y_pred = self.make_prediction(x)
         plt.figure(figsize=(12, 7))
-        plt.plot(x[:, 1], y, 'b*-', label='true_values')
+        plt.scatter(x[:, 1], y, label='true_values')
         plt.plot(x[:, 1], y_pred, 'r*-', label='Predicted values')
         plt.legend(loc='best')
         plt.show()
