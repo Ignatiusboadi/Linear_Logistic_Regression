@@ -5,9 +5,11 @@ from gradient_descent import GradientDescent
 
 class LinearRegression:
     """
-    This class implements linear regression for given input matrix and output vector (matrix). The user can
-    specify which kind of gradient descent algorithm they want to use for learning the weights, the number of epochs,
-    the learning rate for the algorithm and beta, the momentum rate if any.
+    This class provides functionality for training a linear regression model on a features matrix
+    and target vector using gradient descent optimization. It supports both batch gradient descent
+    and stochastic gradient descent. The user can specify  the number of epochs, the learning rate
+    for the algorithm and beta, if they want to apply momentum.
+
     Attributes
     -----------
     x: np.ndarray
