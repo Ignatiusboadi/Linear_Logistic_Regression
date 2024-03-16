@@ -149,13 +149,15 @@ class LinearRegression:
         ss_total = np.sum((y_true - y_mean) ** 2)
         return 1 - ss_reg/ss_total
 
-    def plot_function(self, x=None, y=None):
+    def plot_function(self, x=None, y=None, title='Plot of y against x'):
         """
         Plots the graphs of true target values against predicted values with a regression line.
         :param x: np.ndarray
             feature vector, should be a vector.
         :param y: np.ndarray
             target vector
+        :param title: str
+            title for plot
         :return: graph
         """
         x = self.x if x is None else x
@@ -164,5 +166,6 @@ class LinearRegression:
         plt.figure(figsize=(12, 7))
         plt.scatter(x[:, 1], y, label='true_values')
         plt.plot(x[:, 1], y_pred, 'r*-', label='Predicted values')
+        plt.title(title)
         plt.legend(loc='best')
         plt.show()
