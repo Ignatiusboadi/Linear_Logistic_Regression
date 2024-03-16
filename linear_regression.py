@@ -34,7 +34,7 @@ class LinearRegression:
     --------
     fit:
         implements the gradient descent algorithm using the given features matrix and target vector to find
-        the weights.
+        the best weights.
     make_prediction:
         makes prediction using a given features matrix and the weights determined from the Gradient descent
         algorithm.
