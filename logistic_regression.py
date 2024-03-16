@@ -88,8 +88,8 @@ class LogisticRegression:
         return -1 / x.shape[0] * x.T @ (y - y_pred)
 
     def fit(self):
-        grad_descent = gradient_descent.GradientDescent(self.add_ones(self.x), self.y, self.epochs, lr=0.1, beta=0,
-                                                        batch=None, loss_function=self.cross_entropy,
+        grad_descent = gradient_descent.GradientDescent(self.add_ones(self.x), self.y, self.epochs, self.lr,
+                                                        self.beta,self.batch, loss_function=self.cross_entropy,
                                                         grad_function=self.grad_function)
         grad_descent.fit()
         self.weights = grad_descent.weights
