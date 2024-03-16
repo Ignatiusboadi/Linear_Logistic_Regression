@@ -47,6 +47,9 @@ class LogisticRegression:
     fit:
         implements gradient descent algorithm using inputs to determine best weights. Also changes loss attribute
         of the object.
+    accuracy:
+        computes the level of accuracy for the predictor on given features matrix and target vector.
+        Multiplying output by 100 gives accuracy in percentages.
     """
 
     def __init__(self, x, y, epochs=100, lr=0.1, beta=0, batch=None):
@@ -153,3 +156,20 @@ class LogisticRegression:
         grad_descent.fit()
         self.weights = grad_descent.weights
         self.losses = grad_descent.losses
+
+    def accuracy(self, x=None, y_true=None):
+        """
+        computes the level of accuracy for the predictor on given features matrix and target vector.
+        Multiplying output by 100 gives accuracy in percentages.
+        :param x: np.ndarray
+            features matrix
+        :param y_true: np.ndarray
+            target vector
+        :return: float
+        """
+        x = self.x if x is None else x
+        y_true = self.y if y_true is None else y_true
+        y_pred = self.predict(x)
+        y_true = y_true.reshape((-1, 1))
+        accuracy_value = np.sum(y_true == y_pred) / y_true.shape[0]
+        return accuracy_value
