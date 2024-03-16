@@ -17,7 +17,7 @@ class LogisticRegression:
     x: np.ndarray
         outputs the features matrix to be used in training the linear regression model.
     y: np.ndarray
-        outputs the target vector(matrix) to be used in training the linear regression model.
+        outputs the target vector to be used in training the linear regression model.
     epochs: int
         outputs the number of epochs set to run in the implementation of the gradient descent algorithm.
     lr: float
@@ -54,11 +54,11 @@ class LogisticRegression:
 
     def __init__(self, x, y, epochs=100, lr=0.1, beta=0, batch=None):
         """
-        Initialize regression model for a given input matrix X and target matrix y.
+        Initialize regression model for a given input matrix X and target vector y.
         :param x: np.ndarray
             input matrix
         :param y: np.ndarray
-            target vector (matrix)
+            target vector
         :param epochs: int
             number of epochs
         :param lr: float
@@ -117,7 +117,7 @@ class LogisticRegression:
         :param x: np.ndarray
             features matrix
         :param y: np.ndarray
-            target matrix
+            target vector
         :param w: np.ndarray
             weights
         :return: float
@@ -134,7 +134,7 @@ class LogisticRegression:
         :param x: np.ndarray
             features matrix
         :param y: np.ndarray
-            target matrix
+            target vector
         :param w: np.ndarray
             weights
         :return: float

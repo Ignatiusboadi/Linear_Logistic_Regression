@@ -15,7 +15,7 @@ class LinearRegression:
     x: np.ndarray
         outputs the features matrix to be used in training the linear regression model.
     y: np.ndarray
-        outputs the target vector(matrix) to be used in training the linear regression model.
+        outputs the target vector to be used in training the linear regression model.
     epochs: int
         outputs the number of epochs set to run in the implementation of the gradient descent algorithm.
     lr: float
@@ -52,11 +52,11 @@ class LinearRegression:
 
     def __init__(self, x, y, epochs=1000, lr=0.1, batch=None, beta=0.0):
         """
-        Initialize regression model for a given input matrix X and target matrix y.
+        Initialize regression model for a given input matrix X and target vector y.
         :param x: np.ndarray
             Input matrix X
         :param y: np.ndarray
-            target matrix y
+            target vector y
         :param epochs: int | optional | default = 1000
             number of epochs to be used for the gradient descent algorithm.
         :param lr: float | optional | default = 0.1
@@ -95,7 +95,7 @@ class LinearRegression:
         :param x: np.ndarray
             features matrix for training
         :param y: np.ndarray
-            target vector or matrix for training
+            target vector for training
         :param weights:
             computed weights to be evaluated
         :return: float
@@ -111,7 +111,7 @@ class LinearRegression:
         :param x: np.ndarray
             features matrix for training
         :param y: np.ndarray
-            target vector or matrix for training
+            target vector for training
         :param weights:
             computed weights to be evaluated
         :return: float
@@ -137,8 +137,8 @@ class LinearRegression:
         makes a prediction using x and the weights, then computes the r-square.
         :param x: np.ndarray | default = features matrix used for training
             features matrix for prediction.
-        :param y: np.ndarray | default = target matrix used for training
-            target matrix for evaluation.
+        :param y: np.ndarray | default = target vector used for training
+            target vector for evaluation.
         :return: float
         """
         x = self.x if x is not None else x
@@ -159,7 +159,7 @@ class LinearRegression:
             target vector
         :return: graph
         """
-        assert x.shape[1] == 1, "You can only plot one column feature matrix against a one column target matrix."
+        assert x.shape[1] == 1, "You can only plot one column feature matrix against a one column target vector."
         x = self.x if x is not None else x
         y = self.y if y is not None else y
         y_pred = self.make_prediction(x)
