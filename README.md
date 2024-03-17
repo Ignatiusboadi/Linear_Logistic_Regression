@@ -37,19 +37,20 @@ use the following parameters:
 
 - features: The feature matrix for training the model.
 - target: The target vector for training the model.
-- epochs (optional): Number of epochs to be run
-- lr (optional): learning rate
-- batch_size (optional): Specifies the batch size for mini-batch gradient descent. Default is None for batch gradient
-descent. Passing 1 leads to implementation of Stochastic gradient descent, whilst passing a number other than 1 
-leads to implementation of mini-batch gradient descent with figure passed as batch size . 
-- momentum (optional): Specifies the momentum parameter for gradient descent with momentum. Default is 0 (no momentum).
+- epochs (optional): default = 100 | Number of epochs to be run 
+- lr (optional): default = 0.1 | learning rate
+- batch_size (optional): default = None | Specifies the batch size for mini-batch gradient descent. 
+By default, batch gradient descent is implemented. Passing 1 leads to implementation of Stochastic 
+gradient descent, whilst passing a number other than 1 leads to implementation of mini-batch gradient 
+descent with figure passed as batch size . 
+- momentum (optional): default = 0.0 | Specifies the momentum parameter for gradient descent with momentum.
 
 ```Copy code
 model = LinearRegression(x_train, y_train, epochs=100, lr=0.1, batch=1, beta=0.9)
 model.fit()
 print('model weights', model.weights)
 print('Training r-square', model.r_square())
-print('Test 1 test r-square', model.r_square(x_test, y_test))
+print('Test r-square', model.r_square(x_test, y_test))
 plt.plot(model.losses)
 plt.title('Linear Regression Test 1 losses.')
 plt.show()
