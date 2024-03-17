@@ -62,7 +62,7 @@ examples.
 
 ## Contributing
 Contributions to this project are welcome! If you'd like to contribute, please fork the repository,
-make your changes, and submit a pull request. You can clone this project by executing
+make your changes, and submit a pull request.
 
 ## License
 This project is licensed under the MIT License. See the LICENSE file for details.
