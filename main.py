@@ -44,7 +44,7 @@ print('Test 1 test r-square', lin_reg.r_square(lin_x_test, lin_y_test))
 plt.plot(lin_reg.losses)
 plt.title('Linear Regression Test 1 losses.')
 plt.show()
-lin_reg.plot_function(title='Linear regression Test 1 Actual and Predicted')
+lin_reg.plot_function(title='Test 1 Observed values vs Predicted values')
 
 # Linear Regression Test 2
 x, y = generate_data(n=500, seed=2)
@@ -60,7 +60,7 @@ print('Test 2 test r-square', lin_reg.r_square(lin_x_test, lin_y_test))
 plt.plot(lin_reg.losses)
 plt.title('Linear Regression Test 2 losses.')
 plt.show()
-lin_reg.plot_function(title="Linear regression Test 2 Actual and Predicted")
+lin_reg.plot_function(title="Test 2 Observed values vs Predicted values")
 
 
 # Test 1
